@@ -12,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin implements Listener{
 	
-	private String dir_path = System.getProperty("user.dir") + "\\plugins\\Geluid\\";
+	private String dir_path = System.getProperty("user.dir") + "\\plugins\\Geluid\\lightpin.py";
 	
 	@Override
 	public void onEnable() {
@@ -27,13 +27,8 @@ public class Main extends JavaPlugin implements Listener{
 	public void onBlockBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();
 		
-		
-		
-		player.sendMessage("You broke " + e.getBlock().getType().name());
 		try {
-			Process p = Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd " + "plugins\\Geluid\\playSound1" + " && " + dir_path + "playSound1\\playSound1.exe" + "\""); 
-			p.waitFor();
-			System.out.println(p.exitValue());
+			Runtime.getRuntime().exec("python " + dir_path); 
 		}
 		catch(Exception ex) {
 			player.sendMessage("couldn't play");
@@ -62,7 +57,9 @@ public class Main extends JavaPlugin implements Listener{
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player player = e.getPlayer();
 		
-		switch(e.getClickedBlock().getType().name().toLowerCase()) {
+		String blockname = e.getClickedBlock() != null ? e.getClickedBlock().getType().name().toLowerCase() : "air";
+		
+		switch(blockname) {
 			case "chest":
 				player.sendMessage("steal their shit");
 				
