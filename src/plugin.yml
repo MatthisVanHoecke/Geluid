@@ -1,0 +1,10 @@
+main: me.MatthisVanHoecke.Geluid.Main
+name: Geluid
+version: 1.0.0
+description: plugin to do something
+api-version: 1.16
+author: Matthis
+commands:
+  puttemans:
+    description: This is a demo command.
+    usage: /puttemans
