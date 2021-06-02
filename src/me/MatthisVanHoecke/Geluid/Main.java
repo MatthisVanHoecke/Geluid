@@ -57,7 +57,6 @@ public class Main extends JavaPlugin implements Listener{
 	public void playSound(Player player) {
 		try {
 			Runtime.getRuntime().exec("python " + dir_path + "lightpin.py");
-			Runtime.getRuntime().exec("python " + dir_path + "playSound1\\playSound1.py");
 		}
 		catch(Exception ex) {
 			player.sendMessage("couldn't play");
@@ -103,7 +102,13 @@ public class Main extends JavaPlugin implements Listener{
 		if(e.getEntity() == puttemans && e.getDamager() instanceof Player) {
 			player1 = (Player) e.getDamager();
 			puttemans.remove();
-			player1.sendTitle("Je bent gebuisd!", "", 20, 40, 20);
+			try {
+				Runtime.getRuntime().exec("python " + dir_path + "playSound1.py");
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			player1.sendTitle("You have failed hardware!", "You have to repeat a year.", 20, 30, 20);
 			Bukkit.getScheduler().scheduleSyncDelayedTask(this, new Runnable() {
 			    @Override
 			    public void run() {
@@ -114,7 +119,7 @@ public class Main extends JavaPlugin implements Listener{
 						summonDestruction(chance, perc, rand);
 					}
 			    }
-			}, (long) (20*3.5)); //20 Tick (1 Second) delay before run() is called
+			}, (long) (20*4.2)); //20 Tick (1 Second) delay before run() is called
 		}
 	}
 	
@@ -165,11 +170,11 @@ public class Main extends JavaPlugin implements Listener{
 		
 		switch(blockname) {
 			case "chest":
-				player.sendMessage("steal their shit");
+				player.sendMessage("steal their stuff");
 				
 				break;
 			case "ender_chest":
-				player.sendMessage("Steal their secret shit");
+				player.sendMessage("Steal their secret stuff");
 				break;
 			case "oak_door":
 			case "spruce_door":
